@@ -32,14 +32,32 @@ console.log("Key Pressed " + event.type + " : " +  event.key);
  $("#guesses").append(event.key + ",");
  var isRight = checkGuess(event.key);
  console.log(isRight);
- if(isRight) {
- var winNum = parseInt($('#wins').text());
- $('#wins').text(winNum+1);
-}
-else{
- var lossNum = parseInt($('#loses').text());
- $('#loses').text(lossNum+1);
-}
+
+ if(!isRight) {
+    //guess not correct
+    var left_guess = parseInt($('#left_guess').text())-1;
+    if(left_guess>0){
+        //if guesses are left - reduce them and move on
+        $('#left_guess').text(left_guess);
+    }
+    //if no guesses remain - increase loses count and reset left guess count to 10
+    else{
+         $('#left_guess').text(10);
+         resetLetter();
+         $("#guesses").empty();
+         var lossNum = parseInt($('#loses').text());
+         $('#loses').text(lossNum+1);
+    }
+    
+ }
+ else{
+    // guess is correct; increate Win count and reset the guess left count for next iteration
+    var winNum = parseInt($('#wins').text());
+    $('#wins').text(winNum+1);
+    $('#left_guess').text(10);
+    resetLetter();
+    $("#guesses").empty();
+ }
 });
 
 
