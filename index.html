@@ -7,14 +7,42 @@
     <title>Psychic Game</title>
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
     <script src="./assets/javascript/game.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
-<body onload='randomLetter();'>
+<body>
 
     <h1>The Physchic Game</h1>
     <p>Guess what letter i am thinking of?</p>
-    <p>Wins:</p>
-    <p>Loses:</p>
-    <p>Guesses Left:</p>
-    <p>Your Guesses so far</p>
+    <label>Wins:</label>
+    <p id="wins">0</p>
+    <label>Loses:</label>
+    <p id="loses">0</p>
+    <label>Guesses Left:</label>
+    <p id="left_guess">10</p>
+    <label>Your Guesses so far :</label>
+    <p id="guesses"></p>
+
+<script>
+$( document ).ready(function() {
+    randomLetter();
+});
+
+$(document).keydown(function(event){
+console.log("Key Pressed " + event.type + " : " +  event.key);
+ $("#guesses").append(event.key + ",");
+ var isRight = checkGuess(event.key);
+ console.log(isRight);
+ if(isRight) {
+ var winNum = parseInt($('#wins').text());
+ $('#wins').text(winNum+1);
+}
+else{
+ var lossNum = parseInt($('#loses').text());
+ $('#loses').text(lossNum+1);
+}
+});
+
+
+</script>
 </body>
 </html>
