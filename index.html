@@ -54,9 +54,13 @@ console.log("Key Pressed " + event.type + " : " +  event.key);
     // guess is correct; increate Win count and reset the guess left count for next iteration
     var winNum = parseInt($('#wins').text());
     $('#wins').text(winNum+1);
-    $('#left_guess').text(10);
+    
     resetLetter();
+
     $("#guesses").empty();
+    $('#left_guess').text(10);
+    
+    
  }
 });
 
